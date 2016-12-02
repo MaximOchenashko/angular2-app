@@ -1,0 +1,81 @@
+<page-header></page-header>
+<page-sidebar></page-sidebar>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            User Dashboard
+            <small>Version 0.1</small>
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <section class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">My doctors</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="dataTables_wrapper form-inline">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover dataTable" role="grid">
+                                        <thead>
+                                        <tr role="row">
+                                            <th>Name</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr role="row" *ngFor="let doctor of asyncTableData | async | paginate: config">
+                                            <td>{{ doctor.name }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+                                        Showing {{ firstItem() }} to {{ showItemsCount() }} of {{ config.totalItems }} entries
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <pagination-controls #p
+                                                         [id]="config.id"
+                                                         (pageChange)="getPage($event)">
+                                        <div class="dataTables_paginate paging_simple_numbers">
+                                            <ul class="pagination">
+                                                <li class="paginate_button previous" [class.disabled]="p.isFirstPage()">
+                                                    <a (click)="p.previous()">Previous</a>
+                                                </li>
+                                                <li *ngFor="let page of p.pages" class="paginate_button"
+                                                    [class.active]="p.getCurrent() === page.value">
+                                                    <a (click)="p.setCurrent(page.value)">{{page.label}}</a>
+                                                </li>
+                                                <li class="pagination_button next" [class.disabled]="p.isLastPage()">
+                                                    <a (click)="p.next()">Next</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </pagination-controls>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </section>
+</div>
+
+<footer class="main-footer">
+    <div class="pull-right hidden-xs">
+        <b>Version</b> 2.0
+    </div>
+    <strong>Designed by <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+</footer>

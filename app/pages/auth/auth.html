@@ -1,0 +1,62 @@
+<div class="login-box">
+    <div class="login-logo">
+        <b>Health</b> Keeper
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <div *ngIf="errorMessage != null" class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">?</button>
+            <h4><i class="icon fa fa-ban"></i>Error</h4>
+            <p>{{ errorMessage }}</p>
+        </div>
+        <div *ngIf="successMessage != null" class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">?</button>
+            <h4><i class="icon fa fa-ban"></i>Success</h4>
+            <p>{{ successMessage }}</p>
+        </div>
+        <form (ngSubmit)="onSubmit()" #authForm="ngForm">
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="E-mail" required
+                       [(ngModel)]="credentials.email"
+                       ngControl="email" #email="ngForm"/>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                    E-mail is required
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" required
+                       [(ngModel)]="credentials.password"
+                       ngControl="password" #password="ngForm"/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                    Password is required
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="credentials.rememberMe"/> Remember Me
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!authForm.form.valid || showSpinner">
+                        <i [class.hidden]="!showSpinner" class="fa fa-spinner fa-spin"></i>
+                        Sign In
+                    </button>
+                </div>
+                <!-- /.col -->
+
+            </div>
+        </form>
+
+        <a [routerLink]="['/SignUp']" class="text-center">Register a new membership</a>
+
+    </div>
+    <!-- /.login-box-body -->
+</div>

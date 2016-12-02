@@ -1,0 +1,63 @@
+<div class="register-box">
+
+    <div class="register-logo">
+        <b>Health</b> Keeper
+    </div>
+
+    <div class="register-box-body">
+        <p class="login-box-msg">Register a new membership</p>
+
+        <div *ngIf="errorMessage != null" class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">?</button>
+            <h4><i class="icon fa fa-ban"></i>Error</h4>
+
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" [ngFormModel]="signUpForm">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="First name" ngControl="firstName"/>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <control-message control="firstName"></control-message>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Last name" ngControl="lastName"/>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <control-message control="lastName"></control-message>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="E-mail" ngControl="email"/>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <control-message control="email"></control-message>
+            </div>
+            <div class="form-group has-feedback">
+                <select class="form-control selectpicker" required ngControl="role">
+                    <option *ngFor="let r of roles" [value]="r.code">{{r.name}}</option>
+                </select>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" ngControl="password"/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <control-message control="password"></control-message>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Retype password" ngControl="confirmPassword"/>
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                <control-message control="confirmPassword"></control-message>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat"
+                            [disabled]="!signUpForm.valid || showSpinner">
+                        <i [class.hidden]="!showSpinner" class="fa fa-spinner fa-spin"></i>
+                        Register
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <a [routerLink]="['/SignIn']" class="text-center">I already have a membership</a>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="header">FEATURES</li>
+            <li [class.active]="isRouteActive(['/PatientDashboard'])">
+                <a [routerLink]="['/PatientDashboard']">Dashboard</a>
+            </li>
+            <li [class.active]="isRouteActive(['/Doctors'])">
+                <a [routerLink]="['/Doctors']">All doctors</a>
+            </li>
+            <li [class.active]="isRouteActive(['/MyDoctors'])">
+                <a [routerLink]="['/MyDoctors']">My doctors</a>
+            </li>
+            <li [class.active]="isRouteActive(['/Devices'])">
+                <a [routerLink]="['/Devices']">My devices</a>
+            </li>
+        </ul>
+    </section>
+</aside>
